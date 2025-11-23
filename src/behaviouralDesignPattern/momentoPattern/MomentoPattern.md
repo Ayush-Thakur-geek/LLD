@@ -1,5 +1,7 @@
 # Memento Design Pattern: Text Editor Example
 
+![](Memento_Pattern.png)
+
 ## Overview
 - The diagram visualizes the **Memento Design Pattern** using a text editor scenario.
 - The pattern allows saving and restoring the internal state of an object (here, a text editor) without breaking encapsulation.
@@ -58,4 +60,3 @@
 - Particularly suited for applications needing undo/redo, checkpointing, or rollback—like text editors, games, or transactional systems.
 - Enhances maintainability by separating state storage from logic and UI code.
 
-![](Memento_Pattern.png)
