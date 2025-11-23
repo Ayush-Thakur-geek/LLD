@@ -1,62 +1,67 @@
-# Memento Design Pattern: Text Editor Example
+# Memento Design Pattern
 
-![](Memento_Pattern.png)
-
-## Overview
-- The diagram visualizes the **Memento Design Pattern** using a text editor scenario.
-- The pattern allows saving and restoring the internal state of an object (here, a text editor) without breaking encapsulation.
+The **Memento Design Pattern** lets you capture and save an object’s internal state so it can be restored later, without exposing its internal structure. This is especially useful for implementing undo or rollback features.
 
 ---
 
-## Participants
+## Structure Explanation Using the Example Image
 
-- **TextEditor (Originator)**
-    - Holds the current content.
-    - Provides methods to write text, save current state to a memento, restore state from a given memento, and retrieve content.
-    - Responsible for creating and restoring mementos of its own state.
-
-- **EditorMemento (Memento)**
-    - Stores a snapshot of the editor's content at a specific time.
-    - Only exposes content retrieval; modification is restricted to the originator.
-
-- **Caretaker**
-    - Maintains a history (stack) of mementos.
-    - Manages state-saving and undoing operations by interacting with the originator and the stored mementos.
-    - Doesn't access or modify the stored content directly; only keeps track of state objects.
+![Memento Pattern UML](Memento_Pattern.png)
 
 ---
 
-## Relationships
+### Key Participants (as depicted in the image):
 
-- **TextEditor → EditorMemento**
-    - The TextEditor creates and uses mementos to save/restore its state.
+- **TextEditor (Originator):**
+    - Maintains the main state (`content`).
+    - Provides methods to modify content, create a memento (snapshot), and restore from a memento.
+    - Responsible for creating and restoring its own mementos.
 
-- **Caretaker ⇆ EditorMemento**
-    - Caretaker stores and manages EditorMementos in a stack-like history for undo functionality.
+- **EditorMemento (Memento):**
+    - Stores a representation (snapshot) of the TextEditor's state at a point in time.
+    - Exposes only minimal access (e.g., content retrieval) to prevent outside modification.
+    - Used internally by the Originator, while other objects shouldn’t change its state.
 
-- **Caretaker ⇆ TextEditor**
-    - Caretaker sends save/restore requests to the TextEditor to manage states.
-
----
-
-## Flow Summary
-
-1. **Writing**: The TextEditor updates its content.
-2. **Saving**: The Caretaker tells the TextEditor to save its current state, which produces an EditorMemento and stores it in the Caretaker's history.
-3. **Undo**: The Caretaker restores the last saved state by passing the stored EditorMemento back to the TextEditor.
+- **Caretaker:**
+    - Manages a history stack of EditorMementos.
+    - Calls TextEditor’s save/restore methods but does not directly access or modify the EditorMemento’s internal state.
+    - Enables undo functionality by retrieving the previous memento and passing it to the TextEditor for restoration.
 
 ---
 
-## Key Points
+### Workflow Illustrated by the Image
 
-- **Encapsulation Preserved**: The internal state is never exposed except via memento objects, which only the originator manipulates.
-- **Undo/Redo Feature**: The pattern enables undo/redo functionality by tracking historical states.
-- **Single Responsibility**: Memento only stores state; Caretaker only manages mementos; Originator handles actual content logic.
+1. **Writing/Changing State:**  
+   The TextEditor updates its content through the write method.
+
+2. **Saving the State:**  
+   Caretaker requests the TextEditor to save its current state. The TextEditor creates an EditorMemento and returns it to the Caretaker, which stores it in history.
+
+3. **Undo/Restore:**  
+   When undo is needed, the Caretaker fetches the last EditorMemento and instructs the TextEditor to restore its content to that saved state.
 
 ---
 
-## Applicability
+### Principles Highlighted
 
-- Particularly suited for applications needing undo/redo, checkpointing, or rollback—like text editors, games, or transactional systems.
-- Enhances maintainability by separating state storage from logic and UI code.
+- **Encapsulation:**  
+  The internal state of TextEditor is kept private; only EditorMemento can carry its snapshot, and only TextEditor restores from it.
 
+- **Separation of Concerns:**  
+  The image shows that the Caretaker manages mementos (history), while the TextEditor handles state logic, and EditorMemento acts as a simple container.
+
+- **Undo Functionality:**  
+  Storing multiple EditorMementos allows the application to rollback states as needed—ideal for text editors and similar use cases.
+
+---
+
+## When to Use
+
+- Implementing undo/redo in editors and games.
+- Rolling back states in transactional systems.
+- Saving checkpoints or history in user-centric apps.
+
+---
+
+**Conclusion:**  
+This UML diagram exemplifies how the Memento Pattern enables state preservation and restoration without violating encapsulation. The pattern is powerful for any scenario needing rollback, history, or undo/redo functionality.
