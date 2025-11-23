@@ -4,7 +4,7 @@ package behaviouralDesignPattern.momentoPattern;
 import java.util.Stack;
 
 //Caretaker Class: Manage momentos (snapshots of the TextEditor state)
-public class History {
+public class Caretaker {
     private final Stack<EditorMomento> history = new Stack<>();
 
     public void saveState(TextEditor textEditor) {

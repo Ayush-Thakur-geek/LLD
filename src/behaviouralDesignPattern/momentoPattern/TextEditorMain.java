@@ -3,7 +3,7 @@ package behaviouralDesignPattern.momentoPattern;
 public class TextEditorMain {
     public static void main(String[] args) {
         TextEditor textEditor = new TextEditor();
-        History history = new History();
+        Caretaker history = new Caretaker();
         textEditor.write("Hello World");
         history.saveState(textEditor);
         textEditor.write("Hello World 2");
