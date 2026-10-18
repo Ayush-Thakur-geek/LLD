@@ -1,4 +1,4 @@
-package behaviouralDesignPattern.momentoPattern;
+package behaviouralDesignPattern;
 
 public class CommandDP {
     public static void main(String[] args) {

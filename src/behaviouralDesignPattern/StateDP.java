@@ -1,4 +1,4 @@
-package behaviouralDesignPattern.momentoPattern;
+package behaviouralDesignPattern;
 
 public class StateDP {
     public static void main(String[] args) {
