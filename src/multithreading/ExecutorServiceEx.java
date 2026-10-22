@@ -43,7 +43,6 @@ public class ExecutorServiceEx {
             else f2.thenAccept(System.out::println);
         }
 
-
         executorService.shutdown();
     }
 }
