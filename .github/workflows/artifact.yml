@@ -27,4 +27,4 @@ jobs:
         uses: actions/download-artifact@v4
 
       - name: cat artifact file
-        run: cat artifact.txt
+        run: cat example-artifact/artifact.txt
