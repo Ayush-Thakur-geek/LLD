@@ -25,3 +25,6 @@ jobs:
     steps:
       - name: download artifact
         uses: actions/download-artifact@v4
+
+      - name: cat artifact file
+        run: cat artifact.txt
