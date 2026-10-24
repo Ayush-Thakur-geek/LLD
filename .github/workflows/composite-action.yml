@@ -1,0 +1,18 @@
+name: composite-action.yml
+on:
+  workflow_dispatch:
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    name: using composite action to print the input
+    steps:
+      - uses: actions/checkout@v4
+      - id: composite-action-instance
+        uses: ../actions/composite-action
+        with:
+          who-to-greet: "Ayush"
+      - env:
+          RANDOM_NUMBER: ${{steps.composite-action-instance.outputs.random-number}}
+        run: echo random-number "$RANDOM_NUMBER"
+        shell: bash
