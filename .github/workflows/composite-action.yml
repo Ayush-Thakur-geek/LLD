@@ -1,4 +1,4 @@
-name: composite-action.yml
+name: composite-action
 on:
   workflow_dispatch:
 
@@ -9,10 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: composite-action-instance
-        uses: ../actions/composite-action
+        uses: ./.github/actions/composite-action
         with:
           who-to-greet: "Ayush"
       - env:
-          RANDOM_NUMBER: ${{steps.composite-action-instance.outputs.random-number}}
+          RANDOM_NUMBER: ${{ steps.composite-action-instance.outputs.random-number }}
         run: echo random-number "$RANDOM_NUMBER"
-        shell: bash
