@@ -1,0 +1,30 @@
+name: Automate Pull Request
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  create-pr:
+    name: create a pr
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Open pr from develop to master
+        env:
+          GH_TOKEN: ${{github.token}}
+          GH_REPO: ${{github.repository}}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          open_prs=$(gh pr list --head develop --base master --state open --json number --jq 'length')
+          if [ "$open_prs" -eq 0 ]; then
+            gh pr create \
+              --head develop \
+              --base master \
+              --title "Merge develop into master" \
+              --body "$COMMIT_MESSAGE"
+          else
+            echo "A PR from develop to master is already open. Skipping."
+          fi
