@@ -1,11 +1,19 @@
-name: reusable-workflow.yml
+name: reusable-workflow-caller
 on:
   workflow_dispatch:
 
 jobs:
-  call-reusable-workflow-path:
+  call-reusable-workflow-path-staging:
     name: Invoke reusable workflow with relative path
-    uses: ./.github/workflows/reusable-workflow/reusable.yml
+    uses: ./.github/workflows/reusable.yml
     with:
       environment: 'staging'
       foo: 'bar'
+    secrets: inherit
+  call-reusable-workflow-path-production:
+    name: Invoke reusable workflow with relative path
+    uses: ./.github/workflows/reusable.yml
+    with:
+      environment: 'production'
+      foo: 'bar'
+    secrets: inherit
