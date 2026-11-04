@@ -6,25 +6,20 @@ on:
         required: true
         type: string
       environment:
-        description: "Target Github environment name (e.g. staging, production)"
+        description: "Target GitHub environment name (e.g. staging, production)"
         required: true
         type: string
-      secrets:
-        #Can only pass repo/org secrets, not env secrets
-        REPOSITORY_SECRET:
-          required: true
+
 jobs:
   reusable-workflow-job:
-    environment: ${{inputs.environment}}
+    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
-
     steps:
       - name: job in reusable workflow
         env:
-          FOO: ${{inputs.foo}}
-          ENVIRONMENT_SECRET: ${{secrets.PASSWORD}}
-          ENVIRONMENT_VARIABLE: ${{vars.VALUE}}
-
+          FOO: ${{ inputs.foo }}
+          ENVIRONMENT_SECRET: ${{ secrets.PASSWORD }}
+          ENVIRONMENT_VARIABLE: ${{ vars.VALUE }}
         run: |
           echo "FOO                     = $FOO"
           echo "ENVIRONMENT_SECRET      = $ENVIRONMENT_SECRET"
